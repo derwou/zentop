@@ -1,0 +1,221 @@
+#!/bin/bash
+exit_clean() {
+    stty echo
+    tput cnorm  # Возвращаем курсор
+    clear       # Полностью чистим экран
+        ### --- ТУТ ПИШЕМ ТОЛЬКО ТО, ЧТО ДОЛЖНО ОСТАТЬСЯ ПОСЛЕ Ctrl + C ---
+	        CYANL='\e[0;36m'
+        	BLUE='\e[1;34m'
+	        RED='\e[1;31m'
+	        NC='\e[0m' 	# Без цвета|No Color
+		        echo -e "${CYANL}====================================================${NC}"
+		        echo -e "${BLUE}PC:${NC} $HOSTNAME | ${BLUE}User:${NC} $USER"
+		        echo -e "${CYANL}====================================================${NC}"
+		MODELNAME=$(grep -m 1 "model name" /proc/cpuinfo | awk -F: '{print $2}' | xargs)
+                VENDOR=$(grep -m 1 "vendor_id" /proc/cpuinfo | awk -F: '{print $2}' | xargs)
+# Checking for AMD
+if [ "$VENDOR" = "AuthenticAMD" ]; then
+	        	echo ""
+	        	echo -e "   ${RED}'+:AAAAAAAAAAAAAAAAAAAAA${NC}"
+	        	echo -e "   ${RED}   '+:AAAAAAAAAAAAAAAAAA${NC}"
+	        	echo -e "   ${RED}      '+:AAAAAAAAAAAAAAA${NC}"
+	        	echo -e "   ${RED}    .+A          AAAAAAA${NC}"
+	        	echo -e "   ${RED}  .aAAA          AAAAAAA${NC}"
+	        	echo -e "   ${RED}aAAAAAA          AAAAAAA${NC}"
+	        	echo -e "   ${RED}AAAAAAA          AAAAAAA${NC}"
+	        	echo -e "   ${RED}AAAAAAAAAAAAAA+'  '+:AAA${NC}"
+	        	echo -e "   ${RED}AAAAAAAAAAAA+'      '+:A${NC}"
+	        	echo -e "   ${RED}AAAAAAAAAa+'          '+${NC}"
+	        	echo ""
+	        	echo -e "   ${RED}${MODELNAME}${NC}"
+	                echo -e "${CYANL}====================================================${NC}"
+# If not AMD, then we check for Intel
+elif [ "$VENDOR" = "GenuineIntel" ]; then
+		        echo ""
+		        echo -e "   ${BLUE}                        __.--oo000ooo-._         ${NC}"
+		        echo -e "   ${BLUE}              __--oo00P'               '+0-.     ${NC}"
+		        echo -e "   ${BLUE}        ██ o0P'                    ██ R     'o.  ${NC}"
+		        echo -e "   ${BLUE}    .o0            ██     .█████.  ██         o. ${NC}"
+		        echo -e "   ${BLUE}  .o0'  ██ ██████\ ████  /█/   \█\ ██        .o' ${NC}"
+		        echo -e "   ${BLUE}.o0'    ██ ██   ██ ██   /████████/ ██       .o'  ${NC}"
+		        echo -e "   ${BLUE}00'     ██ ██   ██ ██   |█/        ██     .+0    ${NC}"
+		        echo -e "   ${BLUE}'00.    \█ ██   ██ \███  \██████/  \█  ██P'      ${NC}"
+		        echo -e "   ${BLUE}  '+0h.                            .+H           ${NC}"
+		        echo -e "   ${BLUE}     '+0h+o-.__             __.-oo0P'            ${NC}"
+		        echo -e "   ${BLUE}              '+000ooooo0000P'                   ${NC}"
+		        echo ""
+		        echo -e "   ${BLUE}${MODELNAME}${NC}"
+	                echo -e "${CYANL}====================================================${NC}"
+# If there is another CPU at all
+else
+		        echo "CPU not recognized, but you're cool anyway!"
+fi
+        echo -e "\n"
+        exit 0
+}
+trap exit_clean INT TERM
+# Прячем  мигающий курсор, чтобы скрипт обновлялся плавно
+tput civis
+stty -echo # Блокируем вывод любых нажатий на экран
+clear
+# Включаем бесконечный цикл
+while true; do
+# Переносим курсор в начало экрана БЕЗ очистки и моргания
+	printf "\033[H"	
+# Запрашиваем актуальный размер окна терминала прямо сейчас
+        shopt -s checkwinsize; (:;:)
+    # ПРОВЕРКА РАЗМЕРА: Если окно сжали, прячем графику, чтобы она не ломалась
+if [ "$LINES" -lt 24 ] || [ "$COLUMNS" -lt 62 ]; then
+        clear # Стираем кашу, если окно резко уменьшили
+        printf "\033[H"
+                        echo "⚠️ Window is too small for logo!"
+                        echo "Please enlarge the terminal window..."
+                        echo "Current size: ${COLUMNS}x${LINES}"
+else
+# 0. ЦВЕТА (переменные для удобства)
+	        CYAN='\e[1;36m'; CYANL='\e[0;36m'
+	        GREEN='\e[1;32m'; GREENL='\e[0;32m'
+	        YELLOW='\e[1;33m'; YELLOWL='\e[0;33m'
+	        BLUE='\e[1;34m'; BLUEL='\e[0;34m'
+	        RED='\e[1;31m'; REDL='\e[0;31m'; ORANGEL='\e[0;38;5;166m'; ORANGE='\e[1;38;5;166m'
+	        NC='\e[0m'; BFB='\e[1m'
+# 1. ПК и ПОЛЬЗОВАТЕЛЬ
+	                echo -e "${CYANL}====================================================${NC}"
+	                echo -e "${BLUE}PC:${NC} $HOSTNAME | ${BLUE}User:${NC} $USER"
+	                echo -e "${CYANL}====================================================${NC}"
+# 2. ПРОЦЕССОР И ТЕМПЕРАТУРА
+                FREQ=$(grep -m 1 "cpu MHz" /proc/cpuinfo | awk '{print $4}')
+		RESLT_FREQ=${FREQ%.*}
+		CPU_NUM=$(cat /sys/class/thermal/thermal_zone{0,1}/temp 2>/dev/null | head -n 1 | awk '{print int($1/1000)}')
+		# Логика выбора цвета в зависимости от нагрева
+        if [ -z "$CPU_NUM" ]; then
+                CPU_TEMP="${CYAN}N/A${NC}"
+        elif [ "$CPU_NUM" -le 50 ]; then
+                CPU_TEMP="${GREEN}${CPU_NUM}${GREENL}${NC}°C"
+        elif [ "$CPU_NUM" -le 75 ]; then
+                CPU_TEMP="${YELLOW}${CPU_NUM}${YELLOWL}${NC}°C"
+        else
+                CPU_TEMP="${RED}${CPU_NUM}${REDL}${NC}°C"
+        fi
+		        echo -e "${GREEN}CPU Freq:${NC} ${CYAN}$RESLT_FREQ${NC} MHz"
+		        echo -e "${YELLOW}CPU Temp:${NC} $CPU_TEMP"
+# 3. ОПЕРАТИВНАЯ ПАМЯТЬ
+	# ПАМЯТЬ (самый надежный способ через системный файл)
+		MEM_TOTAL=$(grep MemTotal /proc/meminfo | awk '{print int($2/1024)}')
+		MEM_AVAIL=$(grep MemAvailable /proc/meminfo | awk '{print int($2/1024)}')
+                MEM_USED=$((MEM_TOTAL - MEM_AVAIL))
+		MEM_PCT=$((MEM_USED * 100 / MEM_TOTAL))
+	if [ -z "$MEM_PCT" ]; then
+                RESLT_MPCT="${CYAN}N/A${NC}"
+                COLR_MEM="${CYAN}N/A${NC}"
+        elif [ "$MEM_PCT" -le 54 ]; then
+                RESLT_MPCT="${GREEN}${MEM_PCT}%${NC}"
+                COLR_MEM="${GREEN}${MEM_USED}${NC}"
+        elif [ "$MEM_PCT" -le 69 ]; then
+                RESLT_MPCT="${YELLOW}${MEM_PCT}%${NC}"
+                COLR_MEM="${YELLOW}${MEM_USED}${NC}"
+        elif [ "$MEM_PCT" -le 89 ]; then
+                RESLT_MPCT="${ORANGE}${MEM_PCT}%${NC}"
+                COLR_MEM="${ORANGE}${MEM_USED}${NC}"
+        else
+                RESLT_MPCT="${RED}${MEM_PCT}%${NC}"
+                COLR_MEM="${RED}${MEM_USED}${NC}"
+        fi
+                        echo -e "${BLUE}Memory:${NC} ${COLR_MEM}${NC} MB / ${GREEN}${MEM_TOTAL}${NC} MB (${YELLOW}${RESLT_MPCT}${NC})"
+# 4. ДИСК (корневой раздел /)
+                DISK_TOTAL=$(df --block-size=1G / | awk 'NR==2 {print $2}')
+                DISK_USED=$(df --block-size=1G / | awk 'NR==2 {print $3}')
+                DISK_FREE=$(df --block-size=1G / | awk 'NR==2 {print $4}')
+                DISK_PCT=$((DISK_USED * 100 / DISK_TOTAL))  # процент занятого места
+
+                # Цвет для процента (как у памяти)
+        if [ -z "$DISK_PCT" ]; then
+                DISK_PCT_COLOR="${CYAN}N/A${NC}"
+                DISK_USED_COLOR="${CYAN}N/A${NC}"
+        elif [ "$DISK_PCT" -le 69 ]; then
+                DISK_PCT_COLOR="${GREEN}${DISK_PCT}%${NC}"
+                DISK_USED_COLOR="${GREEN}${DISK_USED}${NC}"
+        elif [ "$DISK_PCT" -le 79 ]; then
+                DISK_PCT_COLOR="${YELLOW}${DISK_PCT}%${NC}"
+                DISK_USED_COLOR="${YELLOW}${DISK_USED}${NC}"
+        elif [ "$DISK_PCT" -le 89 ]; then
+                DISK_PCT_COLOR="${ORANGE}${DISK_PCT}%${NC}"
+                DISK_USED_COLOR="${ORANGE}${DISK_USED}${NC}"
+        else
+                DISK_PCT_COLOR="${RED}${DISK_PCT}%${NC}"
+                DISK_USED_COLOR="${RED}${DISK_USED}${NC}"
+        fi
+
+                        echo -e "${CYAN}Disk:${NC} ${DISK_USED_COLOR}${NC} GB / ${GREEN}${DISK_TOTAL}${NC} GB (${YELLOW}${DISK_PCT_COLOR}${NC} Used)"
+# 5. БАТАРЕЯ
+	        # Проверяем, существует ли вообще папка BAT0 или BAT1 в системе
+        if [ ! -d /sys/class/power_supply/BAT0 ] && [ ! -d /sys/class/power_supply/BAT1 ]; then
+        # Если батареи нет (это ПК)
+                        echo -e "${YELLOW}Battery:${NC} AC Power ${BLUE}★${NC}"
+        else
+                BATT=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
+	        BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
+			# Логика выбора цвета в зависимости от заряда
+                if [ -z "$BATT" ]; then
+                        BAT_PERC="${CYAN}N/A${NC}"
+                elif [ "$BATT" -le 25 ]; then
+                        BAT_PERC="${RED}${BATT}%${NC}"
+                elif [ "$BATT" -le 45 ]; then
+                        BAT_PERC="${YELLOW}${BATT}%${NC}"
+                elif [ "$BATT" -le 64 ]; then
+                        BAT_PERC="${ORANGE}${BATT}%${NC}"
+                elif  [ "$BATT" -le 94 ]; then
+                        BAT_PERC="${GREEN}${BATT}%${NC}"
+                else
+                        BAT_PERC="${BLUE}${BATT}%${NC}"
+                fi
+                        # Ищем статус заряда и закидываем в готовое
+	        if [ "$BAT_STAT" = "Charging" ]; then
+	                BAT_STATUS="${NC}(Charging ${GREEN}▲${NC})"
+                elif [ "$BAT_STAT" = "Full" ]; then
+                        BAT_STATUS="${NC}(Fully Charged ${BLUE}●${NC})"
+                else
+		        BAT_STATUS="${NC}(Discharging ${RED}▼${NC})"
+	        fi
+	fi
+	                echo -e "${YELLOW}Battery:${NC} $BAT_PERC ${BAT_STATUS}\033[K"
+		        echo -e "${CYANL}====================================================${NC}"
+#6. ЛОГОТИП (какой вендор)
+	        VENDOR=$(grep -m 1 "vendor_id" /proc/cpuinfo | awk -F: '{print $2}' | xargs)
+# Checking for AMD
+	if [ "$VENDOR" = "AuthenticAMD" ]; then
+		        echo ""
+		        echo -e "   ${RED}'+:AAAAAAAAAAAAAAAAAAAAA${NC}"
+		        echo -e "   ${RED}   '+:AAAAAAAAAAAAAAAAAA${NC}"
+		        echo -e "   ${RED}      '+:AAAAAAAAAAAAAAA${NC}"
+		        echo -e "   ${RED}    .+A          AAAAAAA${NC}"
+		        echo -e "   ${RED}  .aAAA          AAAAAAA${NC}"
+		        echo -e "   ${RED}aAAAAAA          AAAAAAA${NC}"
+		        echo -e "   ${RED}AAAAAAA          AAAAAAA${NC}"
+		        echo -e "   ${RED}AAAAAAAAAAAAAA+'  '+:AAA${NC}"
+		        echo -e "   ${RED}AAAAAAAAAAAA+'      '+:A${NC}"
+		        echo -e "   ${RED}AAAAAAAAAa+'          '+${NC}"
+	                echo -e "${NC}"
+# If not AMD, then we check for Intel
+	elif [ "$VENDOR" = "GenuineIntel" ]; then
+		        echo ""
+		        echo -e "   ${BLUE}                        __.--oo000ooo-._         ${NC}"
+		        echo -e "   ${BLUE}              __--oo00P'               '+0-.     ${NC}"
+		        echo -e "   ${BLUE}        ██ o0P'                    ██ R     'o.  ${NC}"
+		        echo -e "   ${BLUE}    .o0            ██     .█████.  ██         o. ${NC}"
+		        echo -e "   ${BLUE}  .o0'  ██ ██████\ ████  /█/   \█\ ██        .o' ${NC}"
+		        echo -e "   ${BLUE} o0'    ██ ██   ██ ██   /████████/ ██       .o'  ${NC}"
+		        echo -e "   ${BLUE}00'     ██ ██   ██ ██   |█/        ██     .+0    ${NC}"
+		        echo -e "   ${BLUE}'00.    \█ ██   ██ \███  \██████/  \█  ██P'      ${NC}"
+		        echo -e "   ${BLUE}  '+0h.                            .+H           ${NC}"
+		        echo -e "   ${BLUE}     '+0h+o-.__             __.-oo0P'            ${NC}"
+	        	echo -e "   ${BLUE}              '+000ooooo0000P'                   ${NC}"
+	                echo -e "${NC}"
+# If there is another CPU at all
+        else
+		        echo "CPU not recognized, but you're cool anyway!"
+	fi
+                        echo -e "${RED}[info]${NC} Press ${YELLOW}Ctrl + C${NC} to exit the script"
+fi
+sleep 0.2
+    done
