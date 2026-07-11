@@ -1,7 +1,7 @@
 # 🚀 ZenTop Monitor
 
-**Translated into English by Yandex (Переведено на Английский Яндексом)**
-**Russian is written by a native speaker (Русский написан носителем языка)**
+- **Translated into English by Yandex (Переведено на Английский Яндексом)**
+- **Russian is written by a native speaker (Русский написан носителем языка)**
 
 <img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-23" src="https://github.com/user-attachments/assets/35582094-10e2-40f7-83ac-a065caf2d884" />
 
@@ -12,9 +12,9 @@
 <img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-48" src="https://github.com/user-attachments/assets/c4a61386-9a9e-44aa-922b-0a98e86edb84" />
 
 
-EN:
+- EN:
 **ZenTop** is a fast, lightweight and adaptive system resource monitor on pure Bash for Linux. It updates data smoothly at 200 ms (5 FPS) without straining the processor or flickering when redrawn. 
-RU:
+- RU:
 **ZenTop** — это быстрый, легкий и адаптивный монитор системных ресурсов на чистом Bash для Linux. Он плавно обновляет данные на частоте 200 мс (5 FPS), не нагружая процессор и не мерцая при перерисовке.
 
 ## ✨ Basic features (EN)
@@ -33,20 +33,20 @@ RU:
 
 ## 🛠️ Launch (Как запустить)
 1. Download the script and make it executable (Скачайте скрипт и сделайте его исполняемым ):
-   EN:
+ - EN:
    ``` Bash
    chmod +x zentop-en
    ```
-   RU:
+ - RU:
    ``` Bash
    chmod +x zentop-ru
    ```
 3. Run the program (Запустите программу):
-   EN:
+ - EN:
    ``` Bash 
    ./zentop-en
    ```
-   RU:
+ - RU:
    ``` Bash
    ./zentop-ru
    ```
