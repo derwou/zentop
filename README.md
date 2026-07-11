@@ -34,20 +34,20 @@
 
 ## 🛠️ Launch (Как запустить)
 1. Download the script and make it executable (Скачайте скрипт и сделайте его исполняемым ):
- - EN:
+`EN:`
    ``` Bash
    chmod +x zentop-en
    ```
- - RU:
+`RU:`
    ``` Bash
    chmod +x zentop-ru
    ```
 3. Run the program (Запустите программу):
- - EN:
+`EN:`
    ``` Bash 
    ./zentop-en
    ```
- - RU:
+`RU:`
    ``` Bash
    ./zentop-ru
    ```
