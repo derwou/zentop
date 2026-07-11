@@ -12,10 +12,10 @@
 <img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-48" src="https://github.com/user-attachments/assets/c4a61386-9a9e-44aa-922b-0a98e86edb84" />
 
 
-- EN:
-### **ZenTop** is a fast, lightweight and adaptive system resource monitor on pure Bash for Linux. It updates data smoothly at 200 ms (5 FPS) without straining the processor or flickering when redrawn. 
-- RU:
-### **ZenTop** — это быстрый, легкий и адаптивный монитор системных ресурсов на чистом Bash для Linux. Он плавно обновляет данные на частоте 200 мс (5 FPS), не нагружая процессор и не мерцая при перерисовке.
+`EN:`
+  **ZenTop** is a fast, lightweight and adaptive system resource monitor on pure Bash for Linux. It updates data smoothly at 200 ms (5 FPS) without straining the processor or flickering when redrawn. 
+`RU:`
+  **ZenTop** — это быстрый, легкий и адаптивный монитор системных ресурсов на чистом Bash для Linux. Он плавно обновляет данные на частоте 200 мс (5 FPS), не нагружая процессор и не мерцая при перерисовке.
 
 ## ✨ Basic features (EN)
 - **Dynamic design**: automatically adjusts to the size of the terminal window. If the window is smaller than 62x24, the script hides the graphics, preventing layout failure.
