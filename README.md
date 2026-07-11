@@ -34,6 +34,7 @@
 
 ## 🛠️ Launch (Как запустить)
 1. Download the script and make it executable (Скачайте скрипт и сделайте его исполняемым ):
+   
 `EN:`
    ``` Bash
    chmod +x zentop-en
@@ -42,7 +43,8 @@
    ``` Bash
    chmod +x zentop-ru
    ```
-3. Run the program (Запустите программу):
+2. Run the program (Запустите программу):
+   
 `EN:`
    ``` Bash 
    ./zentop-en
