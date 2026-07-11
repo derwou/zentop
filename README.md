@@ -1,8 +1,11 @@
 # 🚀 ZenTop Monitor
-<img width="443" height="423" alt="Снимок экрана от 2026-07-09 22-38-38" src="https://github.com/user-attachments/assets/d257bc7f-8a5c-4b99-a397-be409e845a4c" />
+<img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-23" src="https://github.com/user-attachments/assets/35582094-10e2-40f7-83ac-a065caf2d884" />
 
-<img width="437" height="321" alt="Снимок экрана от 2026-07-09 22-39-05" src="https://github.com/user-attachments/assets/ec49d25f-2f5c-4c09-894d-96425986f31e" />
+<img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-29" src="https://github.com/user-attachments/assets/b0afedc4-a15b-4473-8b27-d0054c5a5737" />
 
+<img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-44" src="https://github.com/user-attachments/assets/f7800ea4-0b13-48e4-8231-b8ef1826b7d4" />
+
+<img width="750" height="572" alt="Снимок экрана от 2026-07-11 17-53-48" src="https://github.com/user-attachments/assets/c4a61386-9a9e-44aa-922b-0a98e86edb84" />
 
 
 
