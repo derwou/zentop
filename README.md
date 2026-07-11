@@ -33,8 +33,31 @@
 - **Защита от мусора**: ввод клавиатуры полностью блокируется во время работы скрипта, защищая экран от случайных нажатий клавиш. Выход строго по `Ctrl + C` с выводом красивого финального логотипа.
 
 ## 🛠️ Launch (Как запустить)
-1. Download the script and make it executable (Скачайте скрипт и сделайте его исполняемым ):
+1. Download the script and make it executable (Скачиваем скрипт и делаем его исполняемым):
    
+`EN:`
+   ``` Bash
+   sudo wget -qO /usr/local/bin/zentop-en https://raw.github.com/derwou/zentop/main/zentop-en && sudo chmod +x /usr/local/bin/zentop-en
+   ```
+`RU:`
+   ``` Bash
+   sudo wget -qO /usr/local/bin/zentop-ru https://raw.github.com/derwou/zentop/main/zentop-ru && sudo chmod +x /usr/local/bin/zentop-ru
+   ```
+2. Run the program (Запустите программу):
+   
+`EN:`
+   ``` Bash 
+   zentop-en
+   ```
+`RU:`
+   ``` Bash
+   zentop-ru
+   ```
+
+## If it doesn't work, you can always go back to the easy way (Если не сработает, Вы всегда можете вернуться к лёгкому способу):
+
+Download the required version (ru/en) from the page and grant the rights (Скачиваете со страницы нужную версию (русс/англ) и даёте права): 
+
 `EN:`
    ``` Bash
    chmod +x zentop-en
@@ -43,8 +66,8 @@
    ``` Bash
    chmod +x zentop-ru
    ```
-2. Run the program (Запустите программу):
-   
+Run the program (Запустите программу):
+
 `EN:`
    ``` Bash 
    ./zentop-en
