@@ -88,7 +88,7 @@ else
 		RESLT_FREQ=${FREQ%.*}
 		CPU_NUM=$(cat /sys/class/thermal/thermal_zone{0,1}/temp 2>/dev/null | head -n 1 | awk '{print int($1/1000)}')
 		# Логика выбора цвета в зависимости от нагрева
-        if [ -z "$CPU_NUM" ] || [ "$CPU_NUM" -eq 0 ]; then
+        if [ -z "$CPU_NUM" ] || [ "$CPU_NUM" -le -10 ] || [ "$CPU_NUM" -ge 120 ]; then
                 CPU_TEMP="${CYAN}N/A${NC}"
         elif [ "$CPU_NUM" -le 50 ]; then
                 CPU_TEMP="${GREEN}${CPU_NUM}${GREENL}${NC}°C"
