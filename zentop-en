@@ -88,7 +88,7 @@ else
 		RESLT_FREQ=${FREQ%.*}
 		CPU_NUM=$(cat /sys/class/thermal/thermal_zone{0,1}/temp 2>/dev/null | head -n 1 | awk '{print int($1/1000)}')
 		# Логика выбора цвета в зависимости от нагрева
-        if [ -z "$CPU_NUM" ]; then
+        if [ -z "$CPU_NUM" ] || [ "$CPU_NUM" -eq 0 ]; then
                 CPU_TEMP="${CYAN}N/A${NC}"
         elif [ "$CPU_NUM" -le 50 ]; then
                 CPU_TEMP="${GREEN}${CPU_NUM}${GREENL}${NC}°C"
@@ -155,7 +155,7 @@ else
                 BAT_STATUS="${BLUE}★${NC}"
         else
                 BATT=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
-	        BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
+	        	BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
 			# Логика выбора цвета в зависимости от заряда
                 if [ -z "$BATT" ]; then
                         BAT_PERC="${CYAN}N/A${NC}"
