@@ -152,7 +152,8 @@ else
 	        # Проверяем, существует ли вообще папка BAT0 или BAT1 в системе
         if [ ! -d /sys/class/power_supply/BAT0 ] && [ ! -d /sys/class/power_supply/BAT1 ]; then
         # Если батареи нет (это ПК)
-                        echo -e "${YELLOW}Батарея:${NC} Блок питания${BLUE} ★${NC}"
+                BAT_PERC="Блок питания"
+                BAT_STATUS="${BLUE}★${NC}"
         else
                 BATT=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
 	        BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
