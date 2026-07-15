@@ -156,7 +156,7 @@ else
                 BAT_STATUS="${BLUE}★${NC}"
         else
                 BATT=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
-	        BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
+	        	BAT_STAT=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null || cat /sys/class/power_supply/BAT1/status 2>/dev/null)
 			# Логика выбора цвета в зависимости от заряда
                 if [ -z "$BATT" ]; then
                         BAT_PERC="${CYAN}Н/Д${NC}"
