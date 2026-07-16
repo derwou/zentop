@@ -37,11 +37,11 @@
    
 `EN:`
    ``` Bash
-   sudo wget -qO /usr/local/bin/zentop-en https://raw.github.com/derwou/zentop/releases/latest/download/zentop-en && sudo chmod +x /usr/local/bin/zentop-en
+   sudo curl -L -o /usr/local/bin/zentop-en https://github.com/derwou/zentop/releases/latest/download/zentop-en && sudo chmod +x /usr/local/bin/zentop-en
    ```
 `RU:`
    ``` Bash
-   sudo wget -qO /usr/local/bin/zentop-ru https://raw.github.com/derwou/zentop/releases/latest/download/zentop-ru && sudo chmod +x /usr/local/bin/zentop-ru
+   sudo curl -L -o /usr/local/bin/zentop-ru https://github.com/derwou/zentop/releases/latest/download/zentop-ru && sudo chmod +x /usr/local/bin/zentop-ru
    ```
 2. Run the program (Запустите программу):
    
